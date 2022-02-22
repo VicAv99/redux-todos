@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "api": "apps/api",
     "todoit": "apps/todoit",
     "todoit-e2e": "apps/todoit-e2e"
   }
