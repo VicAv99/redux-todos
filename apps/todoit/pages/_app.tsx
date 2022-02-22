@@ -1,15 +1,16 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { Provider } from 'react-redux';
 import './styles.css';
 import { wrapper } from '../redux/store';
+import { Toolbar } from '../components';
 
-function CustomApp({ Component, pageProps, ...props }: AppProps & any) {
+function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
         <title>Welcome to todoit!</title>
       </Head>
+      <Toolbar />
       <Component {...pageProps} />
     </>
   );
