@@ -1,5 +1,5 @@
 import { Todo } from '@dopnization/shared/api-interfaces';
-import { Card, CardContent, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
+import { Button, Card, CardContent, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
 import React from 'react';
 
 interface TodoListProps {
@@ -11,8 +11,8 @@ interface TodoListProps {
 
 export const TodoList = ({ todos = [], ...props }: TodoListProps) => {
   const handleTodoClicked = (id: number) => () => props.onTodoClick?.(id);
-  const handleTodoDeleteClicked = (id: number) => () => props.onTodoClick?.(id);
-  const handleTodoCompleteClicked = (id: number) => () => props.onTodoClick?.(id);
+  const handleTodoDeleteClicked = (id: number) => () => props.onTodoDeleteClick?.(id);
+  const handleTodoCompleteClicked = (id: number) => () => props.onTodoCompletedClick?.(id);
 
   return (
     <Card>
@@ -28,18 +28,19 @@ export const TodoList = ({ todos = [], ...props }: TodoListProps) => {
               key={todo.id}
               secondaryAction={
                 <>
-                  <button
+                  <Button
                     type="button"
                     onClick={handleTodoCompleteClicked(todo.id)}
                   >
                     {todo.completed ? 'Uncomplete' : 'Complete'}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     type="button"
+                    color="error"
                     onClick={handleTodoDeleteClicked(todo.id)}
                   >
-                    Delete
-                  </button>
+                    X
+                  </Button>
                 </>
               }
             >

@@ -1,8 +1,10 @@
+import './styles.css';
+
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import './styles.css';
-import { wrapper } from '../redux/store';
+
 import { Toolbar } from '../components';
+import { wrapper } from '../redux/store';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
