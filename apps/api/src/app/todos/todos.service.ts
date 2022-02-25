@@ -1,5 +1,5 @@
-import { Todo } from "@dopnization/shared/api-interfaces";
-import { Injectable } from "@nestjs/common";
+import { Todo } from '@dopnization/shared/api-interfaces';
+import { Injectable } from '@nestjs/common';
 
 async function simulate<T>(command: () => T) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -25,16 +25,18 @@ export class TodosService {
   private static _items = new Map<number, Todo>(initialTodos);
 
   async getAll() {
-    return simulate(() => [...TodosService._items.values()]);
+    return await simulate(() => [...TodosService._items.values()]);
   }
 
   async add(todo: Todo) {
     const items = await simulate(() => {
+      const randomNum = Math.floor(Math.random() * (10000 - 1 + 1)) + 1;
+
       if (TodosService._items.has(todo.id)) {
         throw new Error('Todo already in list!');
       }
 
-      TodosService._items.set(todo.id, todo);
+      TodosService._items.set(randomNum, {...todo, id: randomNum});
 
       return Array.from(TodosService._items.values());
     });
