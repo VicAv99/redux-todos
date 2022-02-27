@@ -1,8 +1,10 @@
-import { Container, Grid } from "@mui/material";
-import { wrapper } from "../../redux/store";
-import { TodoCard, TodoList } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteTodo, getAllTodos } from "../../redux/todos";
+import { Todo } from '@dopnization/shared/api-interfaces';
+import { Container, Grid } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { TodoCard, TodoList } from '../../components';
+import { wrapper } from '../../redux/store';
+import { createTodo, deleteTodo, getAllTodos } from '../../redux/todos';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (): Promise<any> => {
   await store.dispatch(getAllTodos());
@@ -13,6 +15,9 @@ export function Index() {
   const todos = useSelector((state: any) => state.todoit.todos);
 
   const handleTodoDeleteClicked = (id: number) => dispatch(deleteTodo(id));
+  const handleTodoSubmitClicked = (todo: Todo) => {
+    dispatch(createTodo(todo))
+  };
 
   return (
     <Container>
@@ -21,7 +26,7 @@ export function Index() {
           <TodoList todos={todos} onTodoDeleteClick={handleTodoDeleteClicked} />
         </Grid>
         <Grid item xs={5}>
-          <TodoCard />
+          <TodoCard onTodoSubmitClick={handleTodoSubmitClicked} />
         </Grid>
       </Grid>
     </Container>

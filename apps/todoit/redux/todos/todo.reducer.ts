@@ -1,4 +1,4 @@
-import { DELETE_TODO, LOADING, GET_ALL_TODOS } from "./todo.actions";
+import { TodoActions } from './todo.actions';
 
 const initialState = {
   todos: [],
@@ -7,13 +7,15 @@ const initialState = {
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOADING:
+    case TodoActions.TODOS_LOADING:
       return {
         ...state,
         loading: true,
       };
-    case GET_ALL_TODOS:
-    case DELETE_TODO:
+    case TodoActions.GET_TODOS:
+    case TodoActions.CREATE_TODO:
+    case TodoActions.UPDATE_TODO:
+    case TodoActions.DELETE_TODO:
       return {
         ...state,
         todos: action.payload,
